@@ -5,10 +5,11 @@ import pymysql
 
 app =Flask(__name__)
 
-conn = pymysql.connect(host='localhost',
-                             user ='wenlingding',
-                             password='',
-                             db='CookBookProject')
+conn = pymysql.connect(host='remotemysql.com',
+                             user ='vnUzDcqd18',
+                             password='b1PxZXOQ7V',
+                             db='vnUzDcqd18',
+                             port=3306)
 
 @app.route('/')
 def home():

@@ -28,11 +28,14 @@
                                     <textarea rows="3" cols="23" wrap="hard" name="ingredients"></textarea><br/>
                                </div>
         <div class='process'>
-            <h2>Instrutions:</h2>
-            <label for="step">step
-            <input type="number" min="1" max="10" name="step" value="{{step}}"/></input></label>
-            <label>description
-              <textarea rows="3" cols="23" wrap="hard" name='description' value='{{description}}'></textarea></label>
+                    <h2>Instrutions:</h2>
+            <form role="form-group" id="tb">
+                    <label for="step">step
+                    <input type="number" min="1" max="10" name="step" value="{{step}}"/></input></label>
+                    <label>description
+                      <textarea rows="3" cols="23" wrap="hard" name='description' value='{{description}}'></textarea></label>
+                       <button onclick="add()" style="width:30px; height=30px">add</button>
+            </form>
         </div>
               <button type="submit" name="submit" id="sumbit" value="submit"></button>
                  </fieldset>
@@ -40,6 +43,24 @@
 </div>
 </div>
 </div>
+
+<script>
+    function add() {
+        var form = document.createElement("form-group");
+        form.id = new Date().getTime();
+        form.innerHTML = "<form role='form-group'  style='display: inherit;width: 550px'>" +
+                "Step: " + "<input/>" +
+                "Description: "+" <input/>" +
+                "<button onclick='del(this)' style='width:30px'>delete</button></form>";
+        document.getElementById("tb").appendChild(form);
+    }
+    function del(obj) {
+        var formID = obj.parentNode.parentNode.id;
+        var form = document.getElementById(formID);
+        document.getElementById("tb").removeChild(form);
+    }
+</script>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
