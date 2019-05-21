@@ -1,0 +1,15 @@
+{% extends "home.html" %}
+{% block content %}
+      <div class='container'>
+           <form method='get' action='/search' class='form  mb-2'>
+                    <label>Search</label>
+                    <input type='text' class='form-control' name='search' />
+                    <input type='submit' class='btn btn-primary' value='search'/>
+            </form>
+            {%for c in all_recipe %}
+            {%endfor%}
+        </div>
+{% endblock %}
+  
+  
+  

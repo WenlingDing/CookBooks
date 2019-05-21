@@ -29,7 +29,7 @@ def see_more(recipe_id):
  
  
 @app.route('/add', methods=['GET', 'POST'])
-def add_to_do():
+def add():
     if request.method == 'GET':
         cursor = pymysql.cursors.DictCursor(conn)
         cursor.execute("SELECT user.id, user.name AS user_name, country.name AS country, recipe.date AS date, recipe.name AS recipe_name, cuisine.id AS cuisine_id, cuisine.name AS cuisine_name, recipe.ingredients AS ingredients, recipe_process.step AS step, recipe_process.description AS description FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id INNER JOIN country ON country.id = user.country INNER JOIN recipe_process ON recipe_process.recipe = recipe.id")
@@ -93,19 +93,19 @@ def delete(recipe_id):
     conn.commit()
     return redirect('/')
 
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-    
-    
+# do search  
+@app.route('/search')
+def search():
+    if 'search' not in request.args:
+        sql = "SELECT * from recipe"
+    else:
+        search_for = request.args['search']
+        sql = "SELECT * from recipe WHERE name LIKE '%" + search_for + "%'"
+    cursor = pymysql.cursors.DictCursor(conn)
+    cursor.execute(sql)
+    recipe = cursor.fetchall()
+    return render_template('search.html', all_recipe=recipe)
+  
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),

@@ -4,38 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+     <link rel="stylesheet" type="text/css" href="style.css">
+    <title>add</title>
 </head>
 <body>
-    <form method='POST'>
-        <div>
-             <label>Author:</label>
-                    <input type='text' name='user_name'></input><br>
-              <label>recipe:</label>
-                    <input type='text' name='recipe_name'></input><br>
-             <label>Cuisine:</label>
-            <select name='cuisine'>
-                {%for c in all_cuisine %}
-                <option value='{{c.id}}'>{{c.name}}</option>
-                {%endfor%}
-            </select>
-        <h3>ingredient:</h3>
-          <div>
-                <input type='text' name='ingredients'></input>
-           </div>
+<div class="container">
+   <div class="row">
+  <div class="form col-xs-12 col-sm-12 col-md-12">
+                 <form  mothod="post">
+                 <fieldset>
+                      <label>Author:</label>
+                      <input type='text' name='user_name'></input><br>
+                      <label>recipe:</label>
+                      <input type='text' name='recipe_name'></input><br>
+                      <label>Cuisine:</label>
+                            <select name='cuisine'>
+                                {%for c in all_cuisine %}
+                                <option value='{{c.id}}'>{{c.name}}</option>
+                                {%endfor%}
+                            </select><br>
+                     <label>ingredient:</label>
+                               <div>
+                                    <textarea rows="3" cols="23" wrap="hard" name="ingredients"></textarea><br/>
+                               </div>
         <div class='process'>
-            <h3>process:</h3>
-            <ol start=1>
-                 <input type="text" name="step" value="{{step}}"/></input>
-                  <textarea name='description' value='{{description}}'></textarea>
-                </li>
-            </ol>
+            <h2>Instrutions:</h2>
+            <label for="step">step
+            <input type="number" min="1" max="10" name="step" value="{{step}}"/></input></label>
+            <label>description
+              <textarea rows="3" cols="23" wrap="hard" name='description' value='{{description}}'></textarea></label>
         </div>
-        </div>
-        <input type='submit'>
-    </form>
-
-
+              <button type="submit" name="submit" id="sumbit" value="submit"></button>
+                 </fieldset>
+                  </form>
+</div>
+</div>
+</div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
