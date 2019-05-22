@@ -33,7 +33,7 @@ def see_more(recipe_id):
 def add():
     if request.method == 'GET':
         cursor = pymysql.cursors.DictCursor(conn)
-        cursor.execute("SELECT user.id, user.name AS user_name, country.name AS country, recipe.date AS date, recipe.name AS recipe_name, cuisine.id AS cuisine_id, cuisine.name AS cuisine_name, recipe.ingredients AS ingredients, recipe_process.step AS step, recipe_process.description AS description FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id INNER JOIN country ON country.id = user.country INNER JOIN recipe_process ON recipe_process.recipe = recipe.id")
+        cursor.execute("SELECT * from recipe")
         recipe = cursor.fetchall()
         cursor.execute("SELECT * FROM cuisine")
         cuisine = cursor.fetchall()
@@ -51,11 +51,13 @@ def add():
         step = request.form['step']
         description = request.form['description']
         sql = """
-            INSERT INTO `user` (`name`, `country`) VALUES ("{}", {}");
-            INSERT INTO `recipe` (`user`, `name`, `ingredients`, `cuisine_id`, `intro`) VALUES ("{}", {}"",{}", {}","{}", {}");
-            INSERT INTO `recipe_process` (`step` ,`description`)   
-            VALUES ("{}", "{}")
-        """.format(user, country, user.id, name, ingredients, cuisine_id, cuisine.name, intro, step, description)
+            INSERT INTO `user` (`name`, `country`) VALUES ("{}", {});
+            SET @last_id_in_user = LAST_INSERT_ID();
+            INSERT INTO `recipe` (`user`, `name`, `ingredients`, `cuisine_id`, `intro`) VALUES (@last_id_in_user, "{}" ,"{}", {}, "{}");
+            SET @last_id_in_recipe = LAST_INSERT_ID();
+            INSERT INTO `recipe_process` (`recipe`, `step` ,`description`)   
+            VALUES (@last_id_in_recipe, {}, "{}")
+        """.format(user, country_id, name, ingredients, cuisine_id, intro, step, description)
         cursor = pymysql.cursors.DictCursor(conn)
         cursor.execute(sql)
         conn.commit()
@@ -99,7 +101,6 @@ def delete(recipe_id):
 # do search  
 @app.route('/search')
 def search():
-   
     if 'search' not in request.args:
         sql = "SELECT * from recipe"
     else:

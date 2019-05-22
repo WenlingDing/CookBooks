@@ -2,17 +2,15 @@
 {% block title %}add{% endblock %}
 {%block content %}
 
-<div class='container'>
    <div class='row'>
-                 <form class='center col-xs-12 col-sm-12 col-md-12' mothod='POST'>
+                 <form class='col s12' mothod='POST'>
                  <h3>Add Recipe</h3>
-                 <fieldset class= 'col-xs-12 col-sm-12 col-md-12'>
                       <label>Author:</label>
-                      <input type='text' name='user_name'></input><br>
+                          <input type='text' name='user_name'></input><br>
                       <label>country</label>
                             <select name='country'>
                                 {%for c in all_countries %}
-                                <option value='{{c.id}}'>{{c.name}}</option>
+                                        <option value='{{c.id}}'>{{c.name}}</option>
                                 {%endfor%}
                             </select><br>
                       <label>recipe:</label>
@@ -35,19 +33,20 @@
                     <h2>Instrutions:</h2>
           {%for c in recipe_process %}
                      <div class="input-field col s12">
-                    <label for="step">step
-                      <input type="number" min="1" max="10" name="step" value="{{step}}"/></input></label>
-                      <textarea id="description" name='description' class="materialize-textarea" value='{{description}}'></textarea>
-                      <label for="description">description</label>
+                        <label for="step">step
+                          <input type="number" min="1" max="10" name="step" value="{{step}}"/></input></label>
+                          <textarea id="description" name='description' class="materialize-textarea" value='{{description}}'></textarea>
+                          <label for="description">description</label>
                     </div>   
-                      <a id="scale-demo" href="#!" class="btn-floating btn-large scale-transition">
-                      <i class="material-icons">add</i></a>
+                  <a id="scale-demo" href="#!" class="btn-floating btn-large scale-transition">
+                  <i class="material-icons">add</i></a>
         </div>
        {% endfor %}
                <button class="btn waves-effect waves-light" type="submit" name="action" value="submit">Submit</button>
-                 </fieldset>
           </form>
 </div>
 </div>
 
 {%endblock%}
+
+ 
