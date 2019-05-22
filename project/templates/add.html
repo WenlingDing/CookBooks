@@ -2,57 +2,52 @@
 {% block title %}add{% endblock %}
 {%block content %}
 
-<div class="container">
-   <div class="row">
-  <div class="form col-xs-12 col-sm-12 col-md-12">
-                 <form  mothod="post">
-                 <fieldset>
+<div class='container'>
+   <div class='row'>
+                 <form class='center col-xs-12 col-sm-12 col-md-12' mothod='POST'>
+                 <h3>Add Recipe</h3>
+                 <fieldset class= 'col-xs-12 col-sm-12 col-md-12'>
                       <label>Author:</label>
                       <input type='text' name='user_name'></input><br>
+                      <label>country</label>
+                            <select name='country'>
+                                {%for c in all_countries %}
+                                <option value='{{c.id}}'>{{c.name}}</option>
+                                {%endfor%}
+                            </select><br>
                       <label>recipe:</label>
                       <input type='text' name='recipe_name'></input><br>
+                      <label>introdution:</label>
+                      <input type='text' name='intro'></input><br>
+               <div class="input-field col s12">
                       <label>Cuisine:</label>
                             <select name='cuisine'>
                                 {%for c in all_cuisine %}
                                 <option value='{{c.id}}'>{{c.name}}</option>
                                 {%endfor%}
-                            </select><br>
+                            </select>
+                </div>
                      <label>ingredient:</label>
-                               <div>
-                                    <textarea rows="3" cols="23" wrap="hard" name="ingredients"></textarea><br/>
-                               </div>
-        <div class='process'>
+                           <div>
+                                <textarea rows='3' cols='23' wrap='hard' name='ingredients'></textarea><br/>
+                           </div>
+         <div class='process'>
                     <h2>Instrutions:</h2>
-            <form role="form-group" id="tb">
+          {%for c in recipe_process %}
+                     <div class="input-field col s12">
                     <label for="step">step
-                    <input type="number" min="1" max="10" name="step" value="{{step}}"/></input></label>
-                    <label>description
-                      <textarea rows="3" cols="23" wrap="hard" name='description' value='{{description}}'></textarea></label>
-                       <button onclick="add()" style="width:30px; height=30px">add</button>
-            </form>
+                      <input type="number" min="1" max="10" name="step" value="{{step}}"/></input></label>
+                      <textarea id="description" name='description' class="materialize-textarea" value='{{description}}'></textarea>
+                      <label for="description">description</label>
+                    </div>   
+                      <a id="scale-demo" href="#!" class="btn-floating btn-large scale-transition">
+                      <i class="material-icons">add</i></a>
         </div>
-              <button type="submit" name="submit" id="sumbit" value="submit"></button>
+       {% endfor %}
+               <button class="btn waves-effect waves-light" type="submit" name="action" value="submit">Submit</button>
                  </fieldset>
-                  </form>
+          </form>
 </div>
 </div>
-</div>
-
-<script>
-    function add() {
-        var form = document.createElement("form-group");
-        form.id = new Date().getTime();
-        form.innerHTML = "<form role='form-group'  style='display: inherit;width: 550px'>" +
-                "Step: " + "<input/>" +
-                "Description: "+" <input/>" +
-                "<button onclick='del(this)' style='width:30px'>delete</button></form>";
-        document.getElementById("tb").appendChild(form);
-    }
-    function del(obj) {
-        var formID = obj.parentNode.parentNode.id;
-        var form = document.getElementById(formID);
-        document.getElementById("tb").removeChild(form);
-    }
-</script>
 
 {%endblock%}

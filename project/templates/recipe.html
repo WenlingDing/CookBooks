@@ -6,11 +6,11 @@
          <div>
          {% for e in recipe %}
                <h2>{{e['recipe_name']}}</h2>
+               <p>{{e['date']}}</p>
                    <p>Cuisine:{{e['cuisine_name']}}</p>
-                   <p>introduce:{{e['intro']}}</p>
+                   <p>introdution:{{e['intro']}}</p>
                    <p>Author:{{e['user_name']}}
                    <span>{{e['country']}}</span></p>
-                   <p>{{e['date']}}</p>
                    <p>ingredients:{{e['ingredients']}}</p>
           {%endfor%}
             <h3>process:</h3>

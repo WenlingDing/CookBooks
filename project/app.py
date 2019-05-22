@@ -14,7 +14,7 @@ conn = pymysql.connect(host='remotemysql.com',
 @app.route('/')
 def home():
     cursor = pymysql.cursors.DictCursor(conn)
-    cursor.execute("SELECT recipe.intro AS intro, recipe.id AS recipe_id, user.name AS user_name, country.name AS country, recipe.name AS recipe_name, cuisine.name AS cuisine_name FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id INNER JOIN country ON country.id = user.country")
+    cursor.execute("SELECT recipe.date AS date, recipe.intro AS intro, recipe.id AS recipe_id, user.name AS user_name, country.name AS country, recipe.name AS recipe_name, cuisine.name AS cuisine_name FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id INNER JOIN country ON country.id = user.country")
     user = cursor.fetchall()
     return render_template('home.html', all_user=user)
 
@@ -37,27 +37,30 @@ def add():
         recipe = cursor.fetchall()
         cursor.execute("SELECT * FROM cuisine")
         cuisine = cursor.fetchall()
-        return render_template('add.html', all_recipe = recipe, all_cuisine=cuisine)
+        cursor.execute("SELECT * FROM country")
+        countries = cursor.fetchall()
+        return render_template('add.html', all_recipe = recipe, all_cuisine=cuisine, all_countries=countries )
     else:
         print(request.form)
         user = request.form['user_name']
+        country_id = request.form['country']
         name = request.form['recipe_name']
         cuisine_id = request.form['cuisine']
+        intro =request.form['intro']
         ingredients = request.form['ingredients']
         step = request.form['step']
         description = request.form['description']
         sql = """
-            INSERT INTO recipe(`user` ,`name` ,`ingredients`, `cuisine_id`)
-            VALUES ("{}", "{}", "{}", {}", "{}")
-            INSERT INTO `recipe_process` (`id` ,`recipe` ,`step` ,`description`)   
-            VALUES ("{}", "{}", "{}", {}", "{}")
-        """.format(user, name, ingredients, cuisine_id, id, recipe, step, description)
+            INSERT INTO `user` (`name`, `country`) VALUES ("{}", {}");
+            INSERT INTO `recipe` (`user`, `name`, `ingredients`, `cuisine_id`, `intro`) VALUES ("{}", {}"",{}", {}","{}", {}");
+            INSERT INTO `recipe_process` (`step` ,`description`)   
+            VALUES ("{}", "{}")
+        """.format(user, country, user.id, name, ingredients, cuisine_id, cuisine.name, intro, step, description)
         cursor = pymysql.cursors.DictCursor(conn)
         cursor.execute(sql)
         conn.commit()
         cursor.close()
         return redirect('/')   
-    
     
 @app.route('/edit/<recipe_id>', methods=['GET', 'POST'])
 def edit(recipe_id):
@@ -107,6 +110,11 @@ def search():
     search = cursor.fetchall()
     return render_template('search.html', all_search=search)
   
+  
+  
+  
+  
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
