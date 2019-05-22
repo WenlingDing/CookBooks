@@ -5,14 +5,14 @@
     <form method='GET'>
          <div>
          {% for e in recipe %}
-            <img src=" ">
                <h2>{{e['recipe_name']}}</h2>
                    <p>Cuisine:{{e['cuisine_name']}}</p>
+                   <p>introduce:{{e['intro']}}</p>
                    <p>Author:{{e['user_name']}}
                    <span>{{e['country']}}</span></p>
                    <p>{{e['date']}}</p>
                    <p>ingredients:{{e['ingredients']}}</p>
-       <div class='process'>
+          {%endfor%}
             <h3>process:</h3>
             {%for c in all_process %}
         <ol>
@@ -21,8 +21,8 @@
               <p>{{c.description}}</p>
             </li>
         </ol>
-                {%endfor%}
              {%endfor%}
         </div>
+        
 {%endblock%}
        

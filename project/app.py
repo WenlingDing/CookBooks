@@ -14,7 +14,7 @@ conn = pymysql.connect(host='remotemysql.com',
 @app.route('/')
 def home():
     cursor = pymysql.cursors.DictCursor(conn)
-    cursor.execute("SELECT recipe.id AS recipe_id, user.name AS user_name, country.name AS country, recipe.name AS recipe_name, cuisine.name AS cuisine_name FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id INNER JOIN country ON country.id = user.country")
+    cursor.execute("SELECT recipe.intro AS intro, recipe.id AS recipe_id, user.name AS user_name, country.name AS country, recipe.name AS recipe_name, cuisine.name AS cuisine_name FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id INNER JOIN country ON country.id = user.country")
     user = cursor.fetchall()
     return render_template('home.html', all_user=user)
 
@@ -22,11 +22,11 @@ def home():
 @app.route('/recipe/<recipe_id>', methods=['GET'])
 def see_more(recipe_id):
     cursor = pymysql.cursors.DictCursor(conn)
-    cursor.execute("SELECT user.id, user.name AS user_name, country.name AS country, recipe.date AS date, recipe.name AS recipe_name, cuisine.name AS cuisine_name, recipe.ingredients AS ingredients FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id INNER JOIN country ON country.id = user.country INNER JOIN recipe_process ON recipe_process.recipe = recipe.id WHERE recipe.id = " + recipe_id)
+    cursor.execute("SELECT recipe.intro AS intro, user.id, user.name AS user_name, country.name AS country, recipe.date AS date, recipe.name AS recipe_name, cuisine.name AS cuisine_name, recipe.ingredients AS ingredients FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id INNER JOIN country ON country.id = user.country WHERE recipe.id = " + recipe_id)
     recipe=cursor.fetchall()
     cursor.execute("SELECT  `description` ,  `step` FROM recipe_process WHERE recipe_process.recipe = " + recipe_id)
     process = cursor.fetchall()
-    return render_template('recipe.html', recipe=recipe, all_process=process, id=recipe_id)
+    return render_template('recipe.html', recipe=recipe, all_process=process)
  
  
 @app.route('/add', methods=['GET', 'POST'])
@@ -63,8 +63,8 @@ def add():
 def edit(recipe_id):
     if request.method == 'GET':
         cursor = pymysql.cursors .DictCursor(conn)
-        cursor.execute("SELECT recipe.id AS recipe_id, recipe.name AS recipe_name, cuisine.name AS cuisine_name, recipe.ingredients AS ingredients FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id INNER JOIN recipe_process ON recipe_process.recipe = recipe.id WHERE recipe.id = " + recipe_id)
-        recipe=cursor.fetchall()
+        cursor.execute("SELECT recipe.id AS recipe_id, recipe.name AS recipe_name, cuisine.name AS cuisine_name, recipe.ingredients AS ingredients FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id WHERE recipe.id = " + recipe_id)
+        recipe=cursor.fetchone()
         cursor.execute("SELECT  `description` ,  `step` FROM recipe_process WHERE recipe_process.recipe = " + recipe_id)
         process = cursor.fetchall()
         return render_template('edit.html', recipe=recipe, all_process=process, id=  recipe_id)
