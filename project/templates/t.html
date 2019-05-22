@@ -46,21 +46,6 @@
             font-size: 16px;
         }
     </style>
-    <script>
-        var varCount = 2;
-        $(function () {
-            $('#addVar').on('click', function(){
-                varCount++;
-                $node = '<p><label for="var'+varCount+'">step '+varCount+': </label>'
-                  + '<input type="text" name="var'+varCount+'" id="var'+varCount+'">'
-                  + '<span class="removeVar">delete</span></p>';
-                $(this).parent().before($node);
-            });
-          $('form').on('click', '.removeVar', function(){
-            $(this).parent().remove();
-          });
-        });
-    </script>
 </head>
 <body>
     <div id="container">
@@ -79,5 +64,20 @@
         <p class="alignRight"><input type="submit" value="submit"></p>
       </form>
     </div>
+                <script>
+                var varCount = 2;
+                $(function () {
+                    $('#addVar').on('click', function(){
+                        varCount++;
+                        $node = '<p><label for="var'+varCount+'">step '+varCount+': </label>'
+                          + '<input type="text" name="var'+varCount+'" id="var'+varCount+'">'
+                          + '<span class="removeVar">delete</span></p>';
+                        $(this).parent().before($node);
+                    });
+                  $('form').on('click', '.removeVar', function(){
+                    $(this).parent().remove();
+                  });
+                });
+            </script>
 </body>
 </html>

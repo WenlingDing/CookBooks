@@ -1,29 +1,45 @@
 {% extends 'layout.html' %}
+{% block title %}home{% endblock %}
 {%block content %}
-      <div class='container'>
-           <form method='get' class='form  mb-2'>
-                <div class='form-group'>
-                    <label>Search Terms</label>
-                    <input type='text' class='form-control' name='search' />
-                </div>
-                <input type='submit' class='btn btn-primary'/>
-            </form>
-           
-         {% for e in all_user %}
-        <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-		 <h2>{{e['recipe_name']}}</h2>
-	   	<img src="" style="width:100%">
-			<h5>Cuisine:{{e['cuisine_name']}}</h5> 
-			<h6>author:{{e['user_name']}}</h6>
-		    <span>{{e['country']}}</span>
-           <a href="/recipe/{{e.recipe_id}}" class="read-more">Read More</a>
-            <div style='width:300px'>
-                    <a href="/edit/{{e.recipe_id}}">[Edit]</a>
-                    <a href="/delete/{{e.recipe_id}}">[Delete]</a>
-            </div>
-           {% endfor %}
+      <form class="col s10 m10">
+        <div class="input-field">
+          <input id="search" name='search'  type="search" required>
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
         </div>
-           
+      </form>
+      <div class="input-field col s12">
+        <label>search by</label>
+            <select>
+              <option value="" disabled selected>cuisine</option>
+              <option value="1">recipe</option>
+              <option value="2">author</option>
+              <option value="3">cuisine</option>
+            </select>
+  </div>
+ {% for e in all_user %}     
+  <div class="row">
+        <div class="col s12 m12">
+          <div class="card blue-grey darken-1 ">
+            <div class="card-content white-text">
+              <h4 class="recipeName">{{e['recipe_name']}}</h4>
+              <p>Cuisine:  {{e['cuisine_name']}}<br>
+                 author:  {{e['user_name']}}<br>
+                 country:  {{e['country']}}</p>
+            </div>
+            <div class="card-action">
+               <a href="/recipe/{{e.recipe_id}}" class="read-more">Read More</a>
+              <a href="/edit/{{e.recipe_id}}">[Edit]</a>
+             <a href="/delete/{{e.recipe_id}}">[Delete]</a>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endfor %}
+<script>
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+</script>
+
 {%endblock%}
-       
-  

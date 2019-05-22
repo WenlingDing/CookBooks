@@ -1,14 +1,22 @@
 {% extends "home.html" %}
+{% block title %}search{% endblock %}
 {% block content %}
       <div class='container'>
-           <form method='get' action='/search' class='form  mb-2'>
-                    <label>Search</label>
-                    <input type='text' class='form-control' name='search' />
-                    <input type='submit' class='btn btn-primary' value='search'/>
-            </form>
-            {%for c in all_recipe %}
-            {%endfor%}
+           <form>
+        <div class="input-field">
+          <input id="search" name='search'  type="search" required>
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
         </div>
+   
+
+      </form>
+            {%for c in all_search %}
+            {%endfor%}
+  </div>
+        
+        
+        
 {% endblock %}
   
   

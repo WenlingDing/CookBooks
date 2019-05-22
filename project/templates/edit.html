@@ -19,6 +19,16 @@
         </div>
         <div><label>ingredients:</label>
         <input type="text" name="ingredients" value="{{recipe.ingredients}}"></div>
+         <div class='process'>
+            <h3>process:</h3>
+            {%for c in all_process %}
+                    <ol>
+                        <li>
+                          <lable name='process' value='{{c.step}}'>{{c.step}}</lable>
+                          <p>{{c.description}}</p>
+                        </li>
+                    </ol>
+              {% endfor %}
           <input type="submit" value="Submit" />
 </form>
   

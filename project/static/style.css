@@ -1,0 +1,29 @@
+/* add page */
+fieldset {
+    margin:30px;
+    padding:10px;
+    text-align: center;
+    display: inline-block;
+   
+}
+
+ button {
+    font-weight: bold;
+    font-size: large;
+    border-color: #FFEBCD;
+    word-spacing: 2px;
+    letter-spacing: 1px;
+    color:orange;
+    margin:3vw;
+ }
+ 
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+main {
+    flex: 1 0 auto;
+  }
+      

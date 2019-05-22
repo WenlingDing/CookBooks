@@ -62,11 +62,10 @@ def add():
 @app.route('/edit/<recipe_id>', methods=['GET', 'POST'])
 def edit(recipe_id):
     if request.method == 'GET':
-        recipe_id =request.args.get('recipe_id')
         cursor = pymysql.cursors .DictCursor(conn)
         cursor.execute("SELECT recipe.id AS recipe_id, recipe.name AS recipe_name, cuisine.name AS cuisine_name, recipe.ingredients AS ingredients FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id INNER JOIN recipe_process ON recipe_process.recipe = recipe.id WHERE recipe.id = " + recipe_id)
         recipe=cursor.fetchall()
-        cursor.execute("SELECT  `description` ,  `step` FROM recipe_process WHERE recipe_proc ess.recipe = " + recipe_id)
+        cursor.execute("SELECT  `description` ,  `step` FROM recipe_process WHERE recipe_process.recipe = " + recipe_id)
         process = cursor.fetchall()
         return render_template('edit.html', recipe=recipe, all_process=process, id=  recipe_id)
     else:
@@ -97,6 +96,7 @@ def delete(recipe_id):
 # do search  
 @app.route('/search')
 def search():
+   
     if 'search' not in request.args:
         sql = "SELECT * from recipe"
     else:
@@ -104,8 +104,8 @@ def search():
         sql = "SELECT * from recipe WHERE name LIKE '%" + search_for + "%'"
     cursor = pymysql.cursors.DictCursor(conn)
     cursor.execute(sql)
-    recipe = cursor.fetchall()
-    return render_template('search.html', all_recipe=recipe)
+    search = cursor.fetchall()
+    return render_template('search.html', all_search=search)
   
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
