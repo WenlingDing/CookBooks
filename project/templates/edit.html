@@ -3,15 +3,17 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
- <form method="POST">
+ <form method="POST" method="GET">
         <h1>Edit recipe: {{recipe.name}}</h1>
         <div><label>Recipe:</label><input type="text" name="recipeName" value="{{recipe.name}}"></div>
-        <div><label>Cuisine:</label>
-            <select name='cuisine'>
+        <div><label>introdution:</label>
+        <input type='text' name='intro' value="{{recipe.intro}}"></input></div>
+        <div>
+            <label>Cuisine:</label>
+            <select name='cuisine' style='width:100px;'>
                 {%for c in all_cuisine %}
                 <option value="{{c.id}}">{{c.name}}</option>
                 {% endfor %}
@@ -23,12 +25,14 @@
             <h3>process:</h3>
             {%for c in all_process %}
                     <ol>
-                        <li>
-                          <lable name='process' value='{{c.step}}'>{{c.step}}</lable>
-                          <p>{{c.description}}</p>
+                        <li >
+                          <input type="number" name='step' value='{{c.step}}'></lable>
+                          <textarea name='description'>{{c.description}}</textarea>
                         </li>
                     </ol>
+            
               {% endfor %}
+             
           <input type="submit" value="Submit" />
 </form>
   

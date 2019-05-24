@@ -1,14 +1,35 @@
 {% extends "layout.html" %}
 {% block title %}search{% endblock %}
 {% block content %}
-        <form>
+        <form method='get' >
         <div class="input-field col 4">
           <input id="search" name='search'  type="search" required>
           <label class="label-icon" for="search"><i class="material-icons">search</i></label>
         </div>
-      </form>
-            {%for c in all_search %}
-            {%endfor%}
+        </form>
+        {%for e in all_search %}
+         <div class="row">
+        <div class="col s12 m12">
+          <div class="card blue-grey darken-1 ">
+            <div class="card-content white-text">
+              <h4 class="recipeName">{{e['recipe_name']}}</h4>
+              <p>{{e['date']}}</p>
+              <p>introdution:{{e["intro"]}}</p>
+              <p>Cuisine:  {{e['cuisine_name']}}<br>
+                 author:  {{e['user_name']}}<br>
+                 country:  {{e['country']}}</p>
+            </div>
+            <div class="card-action">
+               <a href="/recipe/{{e.recipe_id}}" class="read-more">Read More</a>
+              <a href="/edit/{{e.recipe_id}}">[Edit]</a>
+             <a href="/delete/{{e.recipe_id}}">[Delete]</a>
+            </div>
+          </div>
+        </div>
+      </div>
+        {%endfor%}
+  
+            
         
 {% endblock %}
   

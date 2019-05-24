@@ -1,52 +1,42 @@
-{% extends 'layout.html' %}
-{% block title %}add{% endblock %}
-{%block content %}
-
-   <div class='row'>
-                 <form class='col s12' mothod='POST'>
-                 <h3>Add Recipe</h3>
-                      <label>Author:</label>
-                          <input type='text' name='user_name'></input><br>
-                      <label>country</label>
-                            <select name='country'>
-                                {%for c in all_countries %}
-                                        <option value='{{c.id}}'>{{c.name}}</option>
-                                {%endfor%}
-                            </select><br>
-                      <label>recipe:</label>
-                      <input type='text' name='recipe_name'></input><br>
-                      <label>introdution:</label>
-                      <input type='text' name='intro'></input><br>
-               <div class="input-field col s12">
-                      <label>Cuisine:</label>
-                            <select name='cuisine'>
-                                {%for c in all_cuisine %}
-                                <option value='{{c.id}}'>{{c.name}}</option>
-                                {%endfor%}
-                            </select>
-                </div>
-                     <label>ingredient:</label>
-                           <div>
-                                <textarea rows='3' cols='23' wrap='hard' name='ingredients'></textarea><br/>
-                           </div>
-         <div class='process'>
-                    <h2>Instrutions:</h2>
-          {%for c in recipe_process %}
-                     <div class="input-field col s12">
-                        <label for="step">step
-                          <input type="number" min="1" max="10" name="step" value="{{step}}"/></input></label>
-                          <textarea id="description" name='description' class="materialize-textarea" value='{{description}}'></textarea>
-                          <label for="description">description</label>
-                    </div>   
-                  <a id="scale-demo" href="#!" class="btn-floating btn-large scale-transition">
-                  <i class="material-icons">add</i></a>
-        </div>
-       {% endfor %}
-               <button class="btn waves-effect waves-light" type="submit" name="action" value="submit">Submit</button>
-          </form>
-</div>
+<div class='row'>
+<form class='col s12' method='POST'>
+ <h3>Add Recipe</h3>
+      <label>Author:</label>
+          <input type='text' name='user_name'></input><br>
+ <div class="input-field col s12">
+     <label>country</label>
+        <select name='country'>
+            {%for c in all_countries %}
+            <option value='{{c.id}}'>{{c.name}}</option>
+            {%endfor%}
+        </select>
+  </div>
+      <label>recipe:</label>
+           <input type='text' name='recipe_name'></input><br>
+      <label>introdution:</label>
+           <input type='text' name='intro'></input><br>
+ <div class="input-field col s12">
+<label>Cuisine:</label>
+        <select name='cuisine'>
+            {%for c in all_cuisine %}
+            <option value='{{c.id}}'>{{c.name}}</option>
+            {%endfor%}
+        </select>
+  </div>
+        <div class="input-field col s12">
+           <label>ingredient:</label>
+            <textarea name='ingredients'></textarea>
+       </div>
+    <label>Instrutions:</label>
+         <div class="input-field col s12">
+                  <label>step</label>
+                  <input type="number" min="1" max="10" name="step"/></input>
+                  <label for="description">description</label>
+                  <textarea name="description"></textarea>
+        </div>   
+       <button class="btn waves-effect waves-light" type="submit" name="action" value="submit">Submit</button>
+  </form>
 </div>
 
-{%endblock%}
 
- 
+
