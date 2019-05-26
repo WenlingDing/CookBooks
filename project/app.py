@@ -52,17 +52,26 @@ def add():
         ingredients = request.form['ingredients']
         step = request.form['step']
         description = request.form['description']
-        sql = """INSERT INTO `user` (`name`, `country`) VALUES ("{}", {})
-            INSERT INTO `recipe` (`user`, `name`, `ingredients`, `cuisine_id`, `intro`) VALUES (last_insert_id(), "{}" ,"{}", {}, "{}")
-            INSERT INTO `recipe_process` (`recipe`, `step` ,`description`)   
-            VALUES (last_insert_id(), {}, "{}")
-        """.format(user, country_id, name, ingredients, cuisine_id, intro, step, description)
+        sql1 = """INSERT INTO `user` (`name`, `country`) VALUES ("{}", {})""".format(user, country_id)
         cursor = pymysql.cursors.DictCursor(conn)
-        cursor.execute(sql)
+        cursor.execute(sql1)
+        conn.commit()
+        sql2 = """INSERT INTO `recipe` (`user`, `name`, `ingredients`, `cuisine_id`, `intro`) VALUES (last_insert_id(), "{}" ,"{}", {}, "{}") """.format(name, ingredients, cuisine_id, intro)
+        cursor = pymysql.cursors.DictCursor(conn)
+        cursor.execute(sql2)
+        conn.commit()
+        sql3 ="""INSERT INTO `recipe_process` ( `recipe`, `step` ,`description`) 
+            VALUES (last_insert_id(), %s, %s);"""
+        cursor = pymysql.cursors.DictCursor(conn)
+        try:             
+            cursor.execute(sql3)         
+        except:             
+            print (cursor._last_executed)             
+            raise                 
         conn.commit()
         cursor.close()
-        return redirect('/')   
-    
+        return redirect('/') 
+        
 @app.route('/edit/<recipe_id>', methods=['GET', 'POST'])
 def edit(recipe_id):
     if request.method == 'GET':
@@ -75,22 +84,23 @@ def edit(recipe_id):
         cuisine=cursor.fetchall()
         return render_template('edit.html', recipe=recipe, all_process=process, all_cuisine=cuisine)
     else:
+        print (request.form);
         name = request.form['recipeName']
         intro = request.form['intro']
         cuisine_id = request.form['cuisine']
         ingredients = request.form['ingredients']
-        sql = """
-            UPDATE recipe SET name = "{}", intro = "{}", ingredients = "{}" WHERE recipe.id = """ + recipe_id.format(name, intro,  ingredients)
+        sql1 = """
+            UPDATE recipe SET name = "{}", intro = "{}", ingredients = "{}" WHERE recipe.id = """ + recipe_id.format(name, intro, ingredients)
         cursor = pymysql.cursors.DictCursor(conn)
-        cursor.execute(sql)
+        cursor.execute(sql1)
         conn.commit()
-        process= request.form['step','description']
+        # process= request.form['step','description']
         step = request.form['step']
         description = request.form['description']
         sql = """
            UPDATE recipe_process SET `recipe` = LAST_INSERT_ID(), step= {} ,description="{}" WHERE recipe_process.recipe = """ + recipe_id.format(step, description)
         cursor = pymysql.cursors.DictCursor(conn)
-        cursor.executemany(sql,process)
+        cursor.execute(sql)
         conn.commit()
         cursor.close()
         return redirect('/')    
@@ -116,8 +126,11 @@ def search():
     search = cursor.fetchall()
     return render_template('search.html', all_search=search)
 
-  
- 
+
+
+
+
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),

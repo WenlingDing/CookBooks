@@ -1,42 +1,108 @@
-<div class='row'>
-<form class='col s12' method='POST'>
- <h3>Add Recipe</h3>
-      <label>Author:</label>
-          <input type='text' name='user_name'></input><br>
- <div class="input-field col s12">
-     <label>country</label>
-        <select name='country'>
-            {%for c in all_countries %}
-            <option value='{{c.id}}'>{{c.name}}</option>
-            {%endfor%}
-        </select>
-  </div>
-      <label>recipe:</label>
-           <input type='text' name='recipe_name'></input><br>
-      <label>introdution:</label>
-           <input type='text' name='intro'></input><br>
- <div class="input-field col s12">
-<label>Cuisine:</label>
-        <select name='cuisine'>
-            {%for c in all_cuisine %}
-            <option value='{{c.id}}'>{{c.name}}</option>
-            {%endfor%}
-        </select>
-  </div>
-        <div class="input-field col s12">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <form class='col-sm-12' method='POST'>
+         <h3>Add Recipe</h3>
+           <div class='col-sm-12'>
+              <label>Author:</label>
+                  <input type='text' name='user_name'></input>
+                    </div>
+           <div class="col-sm-12">
+             <label>country</label>
+                <select name='country'>
+                    {%for c in all_countries %}
+                    <option value='{{c.id}}'>{{c.name}}</option>
+                    {%endfor%}
+                </select>
+                   </div>
+            <div class="col-sm-12">
+            <label>Cuisine:</label>
+            <select name='cuisine'>
+                {%for c in all_cuisine %}
+                <option value='{{c.id}}'>{{c.name}}</option>
+                {%endfor%}
+                    </select>
+                         </div>
+            <div class="col-sm-12">
+              <label>recipe name:</label>
+                   <input type='text' name='recipe_name'></input>
+                      </div>
+             <div class="col-sm-12">
+               <label>introdution:</label>
+                 <textarea rows="3" cols="40" name='intro'></textarea>
+                   </div>
+        <div class="col-sm-12">
            <label>ingredient:</label>
-            <textarea name='ingredients'></textarea>
-       </div>
-    <label>Instrutions:</label>
-         <div class="input-field col s12">
-                  <label>step</label>
-                  <input type="number" min="1" max="10" name="step"/></input>
-                  <label for="description">description</label>
-                  <textarea name="description"></textarea>
-        </div>   
-       <button class="btn waves-effect waves-light" type="submit" name="action" value="submit">Submit</button>
-  </form>
+            <textarea rows="3" cols="40" name='ingredients'></textarea>
+               </div>
+   <table id="myTable" class=" table order-list">
+    <thead>
+        <tr>
+            <td>step</td>
+            <td>Instrutions</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="col-sm-1">
+               <input type="number" min="1" max="10" name="step" class="form-control" /></input>
+            </td>
+            <td class="col-sm-4">
+                <textarea name="description" class="form-control"></textarea>
+            </td>
+            <td class="col-sm-2"><a class="deleteRow"></a>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="1" style="text-align: left;">
+                <input type="button" class="btn btn-lg btn-block" id="addrow" value="Add Row" />
+            </td>
+        </tr>
+        <tr>
+        </tr>
+    </tfoot>
+</table>
+<button class="btn btn-lg btn-block" type="submit" name="action" value="submit">Submit</button>
+</form>
 </div>
+</div>
+</body>
+</html>
+
+<script>
+/*global $ */
+$(document).ready(function () {
+    var counter = 1;
+
+    $("#addrow").on("click", function () {
+        var newRow = $("<tr>");
+        var cols = "";
+        cols += '<td><input type="number" min="1" max="10" class="form-control" name="step"/></td>';
+        cols += '<td><textarea class="form-control" name="description"/></td>';
+        cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
+        newRow.append(cols);
+        $("table.order-list").append(newRow);
+        counter++;
+    });
+
+    $("table.order-list").on("click", ".ibtnDel", function (event) {
+        $(this).closest("tr").remove();       
+        counter -= 1;
+    });
 
 
+});
 
+</script>

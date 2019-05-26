@@ -1,3 +1,4 @@
+<!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -5,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+   </head>
+   <body>
  <form method="POST" method="GET">
         <h1>Edit recipe: {{recipe.name}}</h1>
         <div><label>Recipe:</label><input type="text" name="recipeName" value="{{recipe.name}}"></div>
@@ -26,11 +28,10 @@
             {%for c in all_process %}
                     <ol>
                         <li >
-                          <input type="number" name='step' value='{{c.step}}'></lable>
+                          <input type="number" name='step' value='{{c.step}}'></input>
                           <textarea name='description'>{{c.description}}</textarea>
                         </li>
                     </ol>
-            
               {% endfor %}
              
           <input type="submit" value="Submit" />
