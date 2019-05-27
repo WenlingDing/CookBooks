@@ -54,9 +54,6 @@
     </thead>
     <tbody>
         <tr>
-            <td class="col-sm-1">
-               <input type="number" min="1" max="10" name="step" class="form-control" /></input>
-            </td>
             <td class="col-sm-4">
                 <textarea name="description" class="form-control"></textarea>
             </td>
@@ -89,7 +86,6 @@ $(document).ready(function () {
     $("#addrow").on("click", function () {
         var newRow = $("<tr>");
         var cols = "";
-        cols += '<td><input type="number" min="1" max="10" class="form-control" name="step"/></td>';
         cols += '<td><textarea class="form-control" name="description"/></td>';
         cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
         newRow.append(cols);

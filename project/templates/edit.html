@@ -1,14 +1,17 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-   </head>
-   <body>
- <form method="POST" method="GET">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+</head>
+<body>
+<div class="container">
+ <div class="row">
+  <form method="POST" method="GET" class='col-sm-12'>
         <h1>Edit recipe: {{recipe.name}}</h1>
         <div><label>Recipe:</label><input type="text" name="recipeName" value="{{recipe.name}}"></div>
         <div><label>introdution:</label>
@@ -23,28 +26,63 @@
         </div>
         <div><label>ingredients:</label>
         <input type="text" name="ingredients" value="{{recipe.ingredients}}"></div>
-         <div class='process'>
+         
             <h3>process:</h3>
-            {%for c in all_process %}
-                    <ol>
-                        <li >
-                          <input type="number" name='step' value='{{c.step}}'></input>
-                          <textarea name='description'>{{c.description}}</textarea>
-                        </li>
-                    </ol>
-              {% endfor %}
-             
-          <input type="submit" value="Submit" />
+<table id="myTable" class=" table order-list">
+    <thead>
+        <tr>
+            <td>Instrutions</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="col-sm-4">
+                 {%for c in all_process %}
+                <textarea name="description" class="form-control">{{c.description}}</textarea>
+                 {% endfor %}
+            </td>
+            <td class="col-sm-2"><a class="deleteRow"></a>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="1" style="text-align: left;">
+                <input type="button" class="btn btn-lg btn-block" id="addrow" value="Add Row" />
+            </td>
+        </tr>
+        <tr>
+        </tr>
+    </tfoot>
+</table>
+<button class="btn btn-lg btn-block" type="submit" name="action" value="submit">Submit</button>
 </form>
-  
-       
- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    </body>
+</div>
+</div>
+ </body>
 </html>
-  
-       
-  
-  
-  
+
+<script>
+/*global $ */
+$(document).ready(function () {
+    var counter = 1;
+
+    $("#addrow").on("click", function () {
+        var newRow = $("<tr>");
+        var cols = "";
+        cols += '<td><textarea class="form-control" name="description"/></td>';
+        cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
+        newRow.append(cols);
+        $("table.order-list").append(newRow);
+        counter++;
+    });
+
+    $("table.order-list").on("click", ".ibtnDel", function (event) {
+        $(this).closest("tr").remove();       
+        counter -= 1;
+    });
+
+
+});
+
+</script>

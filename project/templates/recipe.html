@@ -14,14 +14,16 @@
                    <p>ingredients:{{e['ingredients']}}</p>
           {%endfor%}
             <h3>process:</h3>
-            {%for c in all_process %}
         <ol>
+            {%for c in all_process %}
+        
             <li>
               <lable name='process' value='{{c.step}}'>{{c.step}}</lable>
               <p>{{c.description}}</p>
             </li>
-        </ol>
+        
              {%endfor%}
+         </ol>
         </div>
         
 {%endblock%}
