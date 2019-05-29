@@ -14,78 +14,10 @@ conn = pymysql.connect(host='remotemysql.com',
 @app.route('/')
 def home():
     cursor = pymysql.cursors.DictCursor(conn)
-    cursor.execute("SELECT recipe.date AS date, recipe.intro AS intro, recipe.id AS recipe_id, user.name AS user_name, country.name AS country, recipe.name AS recipe_name, cuisine.name AS cuisine_name FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id INNER JOIN country ON country.id = user.country  ORDER BY recipe.date DESC")
-    user = cursor.fetchall()
-    cursor.execute("SELECT * From country")
-    countries=cursor.fetchall()
-    cursor.execute("SELECT * From cuisine")
-    cuisine=cursor.fetchall()
-    return render_template('home.html', all_user=user,all_countries=countries,all_cuisine=cuisine)
-
-
-@app.route('/sort1')
-def orderByRecipe():
-    cursor = pymysql.cursors.DictCursor(conn)
-    cursor.execute("SELECT recipe.date AS date, recipe.intro AS intro, recipe.id AS recipe_id, user.name AS user_name, country.name AS country, recipe.name AS recipe_name, cuisine.name AS cuisine_name FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id INNER JOIN country ON country.id = user.country ORDER BY recipe.name")
-    user = cursor.fetchall()
-    cursor.execute("SELECT * From country")
-    countries=cursor.fetchall()
-    cursor.execute("SELECT * From cuisine")
-    cuisine=cursor.fetchall()
-    return render_template('home.html', all_user=user,all_countries=countries,all_cuisine=cuisine)
-
-@app.route('/sort2')
-def orderByAuthor():
-    cursor = pymysql.cursors.DictCursor(conn)
-    cursor.execute("SELECT recipe.date AS date, recipe.intro AS intro, recipe.id AS recipe_id, user.name AS user_name, country.name AS country, recipe.name AS recipe_name, cuisine.name AS cuisine_name FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id INNER JOIN country ON country.id = user.country ORDER BY recipe.user")
-    user = cursor.fetchall()
-    cursor.execute("SELECT * From country")
-    countries=cursor.fetchall()
-    cursor.execute("SELECT * From cuisine")
-    cuisine=cursor.fetchall()
-    return render_template('home.html', all_user=user,all_countries=countries,all_cuisine=cuisine)
-    
-
-@app.route('/sort3')
-def orderByCuisine():
-    cursor = pymysql.cursors.DictCursor(conn)
-    cursor.execute("SELECT recipe.date AS date, recipe.intro AS intro, recipe.id AS recipe_id, user.name AS user_name, country.name AS country, recipe.name AS recipe_name, cuisine.name AS cuisine_name FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id INNER JOIN country ON country.id = user.country ORDER BY recipe.cuisine_id")
+    cursor.execute("SELECT recipe.date AS date, recipe.intro AS intro, recipe.id AS recipe_id, user.name AS user_name, country.name AS country, recipe.name AS recipe_name, cuisine.name AS cuisine_name FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id INNER JOIN country ON country.id = user.country")
     user = cursor.fetchall()
     return render_template('home.html', all_user=user)
 
-@app.route('/sort4')
-def orderByDate():
-    cursor = pymysql.cursors.DictCursor(conn)
-    cursor.execute("SELECT recipe.date AS date, recipe.intro AS intro, recipe.id AS recipe_id, user.name AS user_name, country.name AS country, recipe.name AS recipe_name, cuisine.name AS cuisine_name FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id INNER JOIN country ON country.id = user.country ORDER BY recipe.date")
-    user = cursor.fetchall()
-    cursor.execute("SELECT * From country")
-    countries=cursor.fetchall()
-    cursor.execute("SELECT * From cuisine")
-    cuisine=cursor.fetchall()
-    return render_template('home.html', all_user=user,all_countries=countries,all_cuisine=cuisine)
-    
-@app.route('/country/<id>')
-def country(id):
-    cursor = pymysql.cursors.DictCursor(conn)
-    cursor.execute("SELECT recipe.date AS date, recipe.intro AS intro, recipe.id AS recipe_id, user.name AS user_name, country.name AS country, recipe.name AS recipe_name, cuisine.name AS cuisine_name FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id INNER JOIN country ON country.id = user.country where country.id = " + id)
-    user=cursor.fetchall()
-    cursor.execute("SELECT * From country")
-    countries=cursor.fetchall()
-    cursor.execute("SELECT * From cuisine")
-    cuisine=cursor.fetchall()
-    return render_template('home.html', all_countries=countries,all_user=user,all_cuisine=cuisine)
-    
-@app.route('/cuisine/<id>')
-def cuisine(id):
-    cursor = pymysql.cursors.DictCursor(conn)
-    cursor.execute("SELECT recipe.date AS date, recipe.intro AS intro, recipe.id AS recipe_id, user.name AS user_name, country.name AS country, recipe.name AS recipe_name, cuisine.name AS cuisine_name FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id INNER JOIN country ON country.id = user.country where cuisine.id = " + id)
-    user=cursor.fetchall()
-    cursor.execute("SELECT * From cuisine")
-    cuisine=cursor.fetchall()
-    cursor.execute("SELECT * From country")
-    countries=cursor.fetchall()
-    return render_template('home.html', all_cuisine=cuisine,all_user=user,all_countries=countries)
-    
 #the recipe details page
 @app.route('/recipe/<recipe_id>', methods=['GET'])
 def see_more(recipe_id):
@@ -94,7 +26,6 @@ def see_more(recipe_id):
     recipe=cursor.fetchall()
     cursor.execute("SELECT  `description` FROM recipe_process WHERE recipe_process.recipe = %s ORDER BY `step`",recipe_id)
     process = cursor.fetchall()
-    print(process)
     return render_template('recipe.html', recipe=recipe, all_process=process)
  
  
@@ -112,6 +43,7 @@ def add():
         countries = cursor.fetchall()
         return render_template('add.html', all_recipe = recipe, all_cuisine=cuisine, all_countries=countries, recipe_process=recipe_process )
     else:
+        all_input = request.form
         user = request.form['user_name']
         country_id = request.form['country']
         name = request.form['recipe_name']
@@ -144,7 +76,7 @@ def add():
 @app.route('/edit/<recipe_id>', methods=['GET', 'POST'])
 def edit(recipe_id):
     if request.method == 'GET':
-        cursor = pymysql.cursors.DictCursor(conn)
+        cursor = pymysql.cursors .DictCursor(conn)
         cursor.execute("SELECT * from recipe WHERE recipe.id = " + recipe_id)
         recipe=cursor.fetchone()
         cursor.execute("SELECT  `description` FROM recipe_process WHERE recipe_process.recipe = " + recipe_id)
@@ -158,25 +90,24 @@ def edit(recipe_id):
         cuisine_id = request.form['cuisine']
         ingredients = request.form['ingredients']
         sql1 = """
+            UPDATE recipe SET name = "{}", intro = "{}", ingredients = "{}" WHERE recipe.id = """ + recipe_id.format(name, intro, ingredients)
             UPDATE recipe SET name = "{}", intro = "{}", ingredients = "{}" WHERE recipe.id = {} """.format(name, intro, ingredients, recipe_id)
-        cursor = pymysql.cursors.DictCursor(conn)
         cursor.execute(sql1)
         conn.commit()
-        # delete all process then update all so that it is can update new row 
-        sql2 = "DELETE FROM recipe_process WHERE recipe_process.recipe =" + recipe_id.format(recipe_id)
-        cursor = pymysql.cursors.DictCursor(conn)
-        cursor.execute(sql2)
-       
         description = request.form.getlist('description')
-        recipeProcess=(recipe_id,description)
+        print("description = ", description)
+        # recipeProcess=(recipe_id,description)
+        # print("recipeProcess = ", recipeProcess)
         counter = 1
         cursor = pymysql.cursors.DictCursor(conn)
-        for i in recipeProcess[1]:
-             sql3 ="""INSERT INTO `recipe_process` ( `recipe`, `step` ,`description`) 
-                VALUES (%s, %s, %s);"""
-             sql3_input = (recipeProcess[0],counter,i)
-             cursor.execute(sql3,sql3_input)    
-             counter+=1
+        for i in description:
+            print ("i = ", i)
+            sql2 = """
+                UPDATE recipe_process SET (`step` ,`description`) VALUES (%s, %s) WHERE recipe_process.recipe = """ + recipe_id
+            sql2input = (counter,i)
+            
+            cursor.execute(sql2,sql2input)
+            counter+=1
         conn.commit()
         cursor.close()
         return redirect('/')    
