@@ -22,7 +22,7 @@ def home():
     cuisine=cursor.fetchall()
     return render_template('home.html', all_user=user,all_countries=countries,all_cuisine=cuisine)
 
-
+# all recipes ordered by recipe name
 @app.route('/sort1')
 def orderByRecipe():
     cursor = pymysql.cursors.DictCursor(conn)
@@ -33,7 +33,8 @@ def orderByRecipe():
     cursor.execute("SELECT * From cuisine")
     cuisine=cursor.fetchall()
     return render_template('home.html', all_user=user,all_countries=countries,all_cuisine=cuisine)
-
+    
+# all recipes ordered by author name
 @app.route('/sort2')
 def orderByAuthor():
     cursor = pymysql.cursors.DictCursor(conn)
@@ -45,7 +46,7 @@ def orderByAuthor():
     cuisine=cursor.fetchall()
     return render_template('home.html', all_user=user,all_countries=countries,all_cuisine=cuisine)
     
-
+# all recipes ordered by cuisine
 @app.route('/sort3')
 def orderByCuisine():
     cursor = pymysql.cursors.DictCursor(conn)
@@ -53,6 +54,7 @@ def orderByCuisine():
     user = cursor.fetchall()
     return render_template('home.html', all_user=user)
 
+#all recipes listed by date ASC
 @app.route('/sort4')
 def orderByDate():
     cursor = pymysql.cursors.DictCursor(conn)
@@ -63,7 +65,8 @@ def orderByDate():
     cursor.execute("SELECT * From cuisine")
     cuisine=cursor.fetchall()
     return render_template('home.html', all_user=user,all_countries=countries,all_cuisine=cuisine)
-    
+ 
+#choose recipes in different country
 @app.route('/country/<id>')
 def country(id):
     cursor = pymysql.cursors.DictCursor(conn)
@@ -74,7 +77,8 @@ def country(id):
     cursor.execute("SELECT * From cuisine")
     cuisine=cursor.fetchall()
     return render_template('home.html', all_countries=countries,all_user=user,all_cuisine=cuisine)
-    
+
+#choose recipes in different cuisine
 @app.route('/cuisine/<id>')
 def cuisine(id):
     cursor = pymysql.cursors.DictCursor(conn)
@@ -86,7 +90,7 @@ def cuisine(id):
     countries=cursor.fetchall()
     return render_template('home.html', all_cuisine=cuisine,all_user=user,all_countries=countries)
     
-#the recipe details page
+#the recipe details page, one recipe one single page
 @app.route('/recipe/<recipe_id>', methods=['GET'])
 def see_more(recipe_id):
     cursor = pymysql.cursors.DictCursor(conn)
@@ -201,10 +205,6 @@ def search():
     cursor.execute(sql)
     search = cursor.fetchall()
     return render_template('search.html', all_search=search)
-
-
-
-
 
 
 if __name__ == '__main__':
