@@ -74,8 +74,8 @@ I played a full game multiple times to ensure that a alert message displayed cor
 
 
 Deployment
-This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
-
+GitHub:https://github.com/WenlingDing/CookBooks
+Heroku:https://cookbooks-project.herokuapp.com/
 In particular, you should provide all details of the differences between the deployed version and the development version, if any, including:
 
 Different values for environment variables (Heroku Config Vars)?
