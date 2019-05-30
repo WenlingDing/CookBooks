@@ -84,7 +84,6 @@ Separate git branch?
 In addition, if it is not obvious, you should also describe how to run your code locally.
 
 
-
 Credits
 
 Content
