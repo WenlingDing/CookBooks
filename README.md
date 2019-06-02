@@ -53,33 +53,68 @@ Features Left to Implement
 ---
 1. Upload photos function - For recipe
 2. Enhance the search function to have an advanced search filter 
-3. User login function
+3. Need to change add page and edit page style to materialize 0.100.2(Now I used bootstrap because when used materialize some buttons cannot work, I am not familiar with materialize and failed to fix it)
 
-Technologies Used
-HTML 5
-CSS 3
-Javascript
-jquery 3.3.1
-python3
-phpmyadmin
-flask
-materialize 0.100.2
-bootstrap 3.3.0
+Technologies Used<br>
+HTML 5<br>
+CSS 3<br>
+Javascript<br>
+jquery 3.3.1<br>
+python3<br>
+phpmyadmin<br>
+flask<br>
+materialize 0.100.2<br>
+bootstrap 3.3.0<br>
 
 Testing
 ---
 I tested the HTML and CSS By Chrome Developer Tools to ensure that it displays correctly at all screen sizes.
-I tested the database in phpmyadmin.
 
+HOME PAGE<br>
+I tested by loading the page and check the page display all the recipes from the database.<br>
+
+To test the functions of search, order, delete and edit, I have to test the "Add" function first to ensure there is a good representation of recipes in the database to test the function.<br>
+
+I test the search functions:<br>
+1. By name - search function work by searching recipe name that matches the character(s) inputted
+2. By country - search function work by retrieving all recipes made by an author of a country
+3. By cuisine - search function work by retrieving all receipes made by the cuisine country
+
+
+I test the order functions:<br>
+1. By name - order function displays recipe by name in descending order 
+2. 
+2. By author - order function display recipe by authors name in descending order
+3. 
+3. By cusine - order function display recipe by cusine name in descending order
+4. 
+4. By date - order function display recipe by date added from earliest to latest 
+
+I test the delete function:<br>
+
+1. I click "Delete" for a recipe, and it was succesfully deleted from the database. 
+
+I test the edit function:<br>
+1. I click "Edit" for a recipe, and i was brought to the edit page to edit the recipe.
+2. On "Edit" page, the page retrieve the recipe so i can make updates while referencing the current information. Upon save, the changes are updated into database and i can see from the home page its successfully updated
+3. I tried to submit with an empty value but was not able to.
+
+
+I test the add functions<br>
+
+1. I tested the add page can work by adding a recipe. 
+2. The add function is tested by first trying a sucessful test case whereby all fields are entered with a value.
+3.I then tested a negative test case where i attempt to submit when any of the fields are not entered with a value. I was unable to do so and a error message to indicate the mandatory was displayed.
+4. Finally I test the UI by adding a row in the instruction page and then deleting the row before submitting it. I check to see the deleted row was not saved in the database.
 
 Deployment
 ---
 GitHub:https://github.com/WenlingDing/CookBooks
 Heroku:https://cookbooks-project.herokuapp.com/
+Datebase : https://remotemysql.com/phpmyadmin/
 
 Credits
 --
-
 Content
 
 The text for recipe was copied from website https://www.allrecipes.com/recipes/

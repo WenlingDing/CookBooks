@@ -13,9 +13,9 @@
  <div class="row">
   <form method="POST" method="GET" class='col-sm-12'>
         <h1>Edit recipe: {{recipe.name}}</h1>
-        <div><label>Recipe:</label><input type="text" name="recipeName" value="{{recipe.name}}"></div>
+        <div><label>Recipe:</label><input type="text" name="recipeName" value="{{recipe.name}}"  required></div>
         <div><label>introdution:</label>
-        <input type='text' name='intro' value="{{recipe.intro}}"></input></div>
+        <input type='text' name='intro' value="{{recipe.intro}}" required></input></div>
         <div>
             <label>Cuisine:</label>
             <select name='cuisine' style='width:100px;'>
@@ -25,7 +25,7 @@
             </select>
         </div>
         <div><label>ingredients:</label>
-        <input type="text" name="ingredients" value="{{recipe.ingredients}}"></div>
+        <input type="text" name="ingredients" value="{{recipe.ingredients}}" required></div>
          
             <h3>process:</h3>
 <table id="myTable" class=" table order-list">
@@ -38,7 +38,7 @@
         <tr>
             <td class="col-sm-4">
                  {%for c in all_process %}
-                <textarea name="description" class="form-control">{{c.description}}</textarea>
+                <textarea name="description" class="form-control"  required>{{c.description}}</textarea>
                  {% endfor %}
             </td>
             <td class="col-sm-2"><a class="deleteRow"></a>

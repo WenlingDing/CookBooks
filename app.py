@@ -38,7 +38,7 @@ def orderByRecipe():
 @app.route('/sort2')
 def orderByAuthor():
     cursor = pymysql.cursors.DictCursor(conn)
-    cursor.execute("SELECT recipe.date AS date, recipe.intro AS intro, recipe.id AS recipe_id, user.name AS user_name, country.name AS country, recipe.name AS recipe_name, cuisine.name AS cuisine_name FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id INNER JOIN country ON country.id = user.country ORDER BY recipe.user")
+    cursor.execute("SELECT recipe.date AS date, recipe.intro AS intro, recipe.id AS recipe_id, user.name AS user_name, country.name AS country, recipe.name AS recipe_name, cuisine.name AS cuisine_name FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id INNER JOIN country ON country.id = user.country ORDER BY user.name")
     user = cursor.fetchall()
     cursor.execute("SELECT * From country")
     countries=cursor.fetchall()

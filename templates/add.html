@@ -18,14 +18,13 @@
                     <label>Author:</label>
                     <input type='text' name='user_name' required ></input>
                 </div>
-                  <br>
                 <div class="input-group">
                     <label>country</label>
                     <select name='country'>
                     {%for c in all_countries %}
                     <option value='{{c.id}}'>{{c.name}}</option>
                     {%endfor%}
-                </select>
+                    </select>
                 </div>
                 <div class="input-group">
                     <label>Cuisine:</label>
@@ -69,17 +68,18 @@
                                 <input type="button" class="btn btn-lg btn-block" id="addrow" value="Add Row" />
                             </td>
                         </tr>
-                        <tr>
-                        </tr>
                     </tfoot>
                 </table>
+                <div  class='col-sm-8' >
                 <button class="btn btn-lg btn-block" type="submit" name="action" value="submit">Submit</button>
+                </div>
             </form>
         </div>
     </div>
 </body>
 
 </html>
+
 
 <script>
     /*global $ */
