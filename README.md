@@ -53,7 +53,7 @@ Features Left to Implement
 ---
 1. Upload photos function - For recipe
 2. Enhance the search function to have an advanced search filter 
-3. Need to change add page and edit page style to materialize 0.100.2(Now I used bootstrap because when used materialize some buttons cannot work, I am not familiar with materialize and failed to fix it)
+
 
 Technologies Used<br>
 HTML 5<br>
@@ -63,8 +63,7 @@ jquery 3.3.1<br>
 python3<br>
 phpmyadmin<br>
 flask<br>
-materialize 0.100.2<br>
-bootstrap 3.3.0<br>
+bootstrap<br>
 
 Testing
 ---
