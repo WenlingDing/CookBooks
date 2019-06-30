@@ -1,15 +1,102 @@
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+   <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+   <title>add</title>
     <!------ Include the above in your HEAD tag ---------->
+    <style>
+  .icon {
+    display: inline-block;
+    font-size: 4vw;
+    margin-left: 2vw;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+}
+
+footer{
+    margin-top:10px;
+}
+
+.footerBlock{
+    display:inline-block;
+    padding: 3em;
+    margin: 0em;
+}
+
+
+.footerIntro{
+    font-size:small;
+}
+
+.info {
+    text-indent: 2em;
+    font-size: medium;
+    margin-bottom: 20px;
+}
+
+.page-footer{
+    background-color:#2F4F4F;
+    color:#F0F8FF;
+    bottom: 0;
+}
+
+.fList {
+    text-decoration:underline;
+}
+
+
+.link {
+    text-indent: 4em;
+    font-size: medium;
+}
+
+.link1 {
+    color: white;
+    font-size: medium;
+    line-height:2em;
+}
+
+.copyright {
+    text-align: center;
+    font-size: xx-small;
+    background-color: #000000;
+    margin: 0px;
+    padding-bottom: 1px;
+    position: relative;
+}
+</style>
 </head>
 
 <body>
+    <!--navbar-->
+<div class="container-fluid"> 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">CookBooks</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/add">add recipe</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" method='get' action='/search'>
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search" name='search' type="search" required>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+</div>
+<!--content-->
     <div class="container">
         <div class="row">
             <form class='col-sm-12' method='POST'>
@@ -76,10 +163,52 @@
             </form>
         </div>
     </div>
-</body>
-
-</html>
-
+    <!-- footer --> 
+<footer class="page-footer font-small">
+    <div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-4 col-md-4 footerBlock">
+					<p class="footerIntro">Thank you for visiting TravelPlanWuhan. We do welcome your comments & questions.</p>
+					  <div class="icon"><span href="#" style="margin:8px;"><i class="fab fa-facebook-square"></i></span>
+						<span href="#" style="margin:8px;"><i class="fab fa-twitter"></i></span>
+						<span href="#" style="margin:8px;"><i class="fab fa-google"></i></span>
+			          </div>
+			</div>
+			<div class="col-xs-12 col-sm-4 col-md-4 footerBlock">
+					<h6 class="info">Contact Info</h6>
+					<div class="contact-info">
+						 <ul><i class="fas fa-phone-square"></i><span class="item">+65 98000000</span></ul>
+                        <ul><i class="fas fa-envelope"></i><span class="item">ddddd18@gmail.com</span></ul>
+                        <ul><i class="fas fa-fax"></i><span class="item">732-979-2822</span></ul>
+					</div>
+				</div>
+      <div class="col-xs-12 col-sm-4 col-md-4 footerBlock">
+					<div class="list-unstyled">
+					  <h6 class="link">Link</h6>
+  						 <ul class="fList">
+                  <ul>
+                    <a class="link1" href="home.html">Home</a>
+                  </ul>
+                  <ul>
+                    <a class="link1" href="privateTours.html">Private Tours</a>
+                  </ul>
+                  <ul>
+                    <a  class="link1" href="group.html">Group Tours</a>
+                  </ul>
+                  <ul>
+                    <a class="link1" href="contactUs.html">Contact Us</a>
+                  </ul>
+             </ul>
+					</div>
+				</div>
+				<div class="col-md-12 bg-black copyright">
+						<p>@2019 Design by trent global college <br>
+                        F0-0 Building X,Jiefang Avenue, Qiaokou District, Wuhan, China</p>
+                </div> 
+        	</div>
+        	</div>
+</footer>	
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <script>
     /*global $ */
@@ -104,3 +233,5 @@
 
     });
 </script>
+</body>
+</html>

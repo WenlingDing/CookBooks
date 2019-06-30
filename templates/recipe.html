@@ -2,10 +2,14 @@
 {% block title %}recipe{% endblock %}
 {%block content %}
 
+<div class="container">
+  <div class="row">
     <form method='GET'>
          <div>
+         <img src="/static/1.jpg" class="img-fluid" alt="Responsive image">
          {% for e in recipe %}
                <h2>{{e['recipe_name']}}</h2>
+               <!--<img src={{e['image']}}/>-->
                <p>{{e['date']}}</p>
                    <p>Cuisine:{{e['cuisine_name']}}</p>
                    <p>introdution:{{e['intro']}}</p>
@@ -16,15 +20,14 @@
             <h3>process:</h3>
         <ol>
             {%for c in all_process %}
-        
             <li>
               <lable name='process' value='{{c.step}}'>{{c.step}}</lable>
               <p>{{c.description}}</p>
             </li>
-        
              {%endfor%}
          </ol>
         </div>
-        
+      </div>
+     </div>
 {%endblock%}
        

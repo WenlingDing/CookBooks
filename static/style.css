@@ -1,29 +1,70 @@
 /* add page */
-fieldset {
-    margin:30px;
-    padding:10px;
-    text-align: center;
-    display: inline-block;
+/*fieldset {*/
+/*    margin:30px;*/
+/*    padding:10px;*/
+/*    text-align: center;*/
+/*    display: inline-block;*/
    
+/*}*/
+
+/* button {*/
+/*    font-weight: bold;*/
+/*    font-size: large;*/
+/*    border-color: #FFEBCD;*/
+/*    word-spacing: 2px;*/
+/*    letter-spacing: 1px;*/
+/*    color:orange;*/
+/*    margin:3vw;*/
+/* }*/
+ 
+/*body {*/
+/*    display: flex;*/
+/*    min-height: 100vh;*/
+/*    flex-direction: column;*/
+/*  }*/
+
+/*main {*/
+/*    flex: 1 0 auto;*/
+/*  }*/
+      
+/*navbar*/
+.allDropdownMenu {
+    margin: 2em;
+    padding-left: 5em; 
+}
+/*body*/
+
+.p1 {
+    text-align: left;
 }
 
- button {
-    font-weight: bold;
-    font-size: large;
-    border-color: #FFEBCD;
-    word-spacing: 2px;
-    letter-spacing: 1px;
-    color:orange;
-    margin:3vw;
- }
- 
-body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
+.p2 {
+    text-align: left;
+}
 
-main {
-    flex: 1 0 auto;
-  }
-      
+.p3 {
+    text-align: left;
+}
+
+.centent {
+    text-align: center;
+}
+
+.text {
+    margin-top: 1em;
+    padding: 1px;
+}
+
+h3{
+    line-height: 1.25;
+    font-weight:bold;
+    font-style: italic;
+    letter-spacing: 0.05em;
+    color:#DB4322;
+    text-align: left;
+}
+
+i {
+    color:orange;
+}
+

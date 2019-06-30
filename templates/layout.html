@@ -3,63 +3,148 @@
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-   <!-- Compiled and minified CSS -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css')}}" >
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css')}}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+   <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
   <title>{% block title %}{% endblock %}</title>
 </head>
+
+<style>
+  .icon {
+    display: inline-block;
+    font-size: 4vw;
+    margin-left: 2vw;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+}
+
+footer{
+    margin-top:10px;
+}
+
+.footerBlock{
+    display:inline-block;
+    padding: 3em;
+    margin: 0em;
+}
+
+
+.footerIntro{
+    font-size:small;
+}
+
+.info {
+    text-indent: 2em;
+    font-size: medium;
+    margin-bottom: 20px;
+}
+
+.page-footer{
+    background-color:#2F4F4F;
+    color:#F0F8FF;
+    bottom: 0;
+}
+
+.fList {
+    text-decoration:underline;
+}
+
+
+.link {
+    text-indent: 4em;
+    font-size: medium;
+}
+
+.link1 {
+    color: white;
+    font-size: medium;
+    line-height:2em;
+}
+
+.copyright {
+    text-align: center;
+    font-size: xx-small;
+    background-color: #000000;
+    margin: 0px;
+    padding-bottom: 1px;
+    position: relative;
+}
+</style>
+
 <body>
-<div class="container">
-<nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo center">COOKBOOKS</a>
-      <ul id="nav-mobile" class="left hide-on-med-and-down">
-          <li><a href="/add">add recipe</a></li>
-          <li><a href="/">home</a></li>
-      </ul>
-    </div>
+  <!--navbar-->
+<div class="container-fluid"> 
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">CookBooks</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/add">add recipe</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0" method='get' action='/search'>
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search" name='search' type="search" required>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+      </div>
   </nav>
-      
+</div>
 {%block content %}
 {%endblock %}
- <footer class="page-footer">
-          <div class="container">
-            <div class="row">
-              <div class="col l6 s12">
-                <h5 class="white-text">Thanks for your view!</h5>
-                <p class="grey-text text-lighten-4">This is my first project created by Python3, flask, phpmyadmin, Materialize, HTML5 and CSS.</p>
-              </div>
-              <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
-                <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="footer-copyright">
-            <div class="container">
-            © 2019 Copyright Text
-            </div>
-          </div>
-        </footer>
- </div>    
-<script  type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+<!-- footer --> 
+<footer class="page-footer font-small">
+    <div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-4 col-md-4 footerBlock">
+					<p class="footerIntro">Thank you for visiting TravelPlanWuhan. We do welcome your comments & questions.</p>
+					  <div class="icon"><span href="#" style="margin:8px;"><i class="fab fa-facebook-square"></i></span>
+						<span href="#" style="margin:8px;"><i class="fab fa-twitter"></i></span>
+						<span href="#" style="margin:8px;"><i class="fab fa-google"></i></span>
+			          </div>
+			</div>
+			<div class="col-xs-12 col-sm-4 col-md-4 footerBlock">
+					<h6 class="info">Contact Info</h6>
+					<div class="contact-info">
+						 <ul><i class="fas fa-phone-square"></i><span class="item">+65 98000000</span></ul>
+                        <ul><i class="fas fa-envelope"></i><span class="item">ddddd18@gmail.com</span></ul>
+                        <ul><i class="fas fa-fax"></i><span class="item">732-979-2822</span></ul>
+					</div>
+				</div>
+      <div class="col-xs-12 col-sm-4 col-md-4 footerBlock">
+					<div class="list-unstyled">
+					  <h6 class="link">Link</h6>
+  						 <ul class="fList">
+                  <ul>
+                    <a class="link1" href="home.html">Home</a>
+                  </ul>
+                  <ul>
+                    <a class="link1" href="add.html">add</a>
+                  </ul>
+             </ul>
+					</div>
+				</div>
+				<div class="col-md-12 bg-black copyright">
+						<p>@2019 Design by trent global college <br>
+                        F0-0 Building X,Jiefang Avenue, Qiaokou District, Wuhan, China</p>
+                </div> 
+        	</div>
+        	</div>
+</footer>		  
+
+   <!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-
-
-<script type="text/javascript">
-/* global $ */
-$(document).ready(function() {
-         $('select').material_select();
-      });
-    </script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
-

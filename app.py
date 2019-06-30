@@ -52,7 +52,11 @@ def orderByCuisine():
     cursor = pymysql.cursors.DictCursor(conn)
     cursor.execute("SELECT recipe.date AS date, recipe.intro AS intro, recipe.id AS recipe_id, user.name AS user_name, country.name AS country, recipe.name AS recipe_name, cuisine.name AS cuisine_name FROM user INNER JOIN recipe ON user.id = recipe.user INNER JOIN cuisine ON cuisine.id = recipe.cuisine_id INNER JOIN country ON country.id = user.country ORDER BY recipe.cuisine_id")
     user = cursor.fetchall()
-    return render_template('home.html', all_user=user)
+    cursor.execute("SELECT * From country")
+    countries=cursor.fetchall()
+    cursor.execute("SELECT * From cuisine")
+    cuisine=cursor.fetchall()
+    return render_template('home.html', all_user=user,all_countries=countries,all_cuisine=cuisine)
 
 #all recipes listed by date ASC
 @app.route('/sort4')
@@ -76,7 +80,7 @@ def country(id):
     countries=cursor.fetchall()
     cursor.execute("SELECT * From cuisine")
     cuisine=cursor.fetchall()
-    return render_template('home.html', all_countries=countries,all_user=user,all_cuisine=cuisine)
+    return render_template('home.html', all_countries=countries, all_user=user, all_cuisine=cuisine)
 
 #choose recipes in different cuisine
 @app.route('/cuisine/<id>')
